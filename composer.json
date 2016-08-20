@@ -1,0 +1,48 @@
+{
+  "name": "xpressengine-plugin/openseminar_todo_list",
+  "description": "This Package is Xpressengine Plugin - Todo list 프러그인.",
+  "keywords": [
+    "xpressengine",
+    "plugin"
+  ],
+  "license": "LGPL-2.0",
+  "version": "1.0.0",
+  "type": "xpressengine-plugin",
+  "support": {
+    "email": "input@your.email"
+  },
+  "authors": [
+    {
+      "name": "input your name",
+      "email": "input@your.email",
+      "homepage": "http://input.your.site",
+      "role": "Developer"
+    }
+  ],
+  "extra": {
+    "xpressengine": {
+      "title": "Todo list 플러그인",
+      "component": {
+        "module/openseminar_todo_list@todoList": {
+          "class": "OpenSeminar\\TodoList\\Modules\\TodoList",
+          "name": "Todo list 모듈",
+          "description": "",
+          "screenshot" : []
+        },
+        "module/openseminar_todo_list@todoList/skin/openseminar_todo_list@defaultSkin": {
+          "class": "OpenSeminar\\TodoList\\Skins\\DefaultSkin",
+          "name": "Todo list 모듈의 기본 스킨",
+          "description": "",
+          "screenshot" : []
+        }
+      }
+    }
+  },
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {
+      "OpenSeminar\\TodoList\\": "src/"
+    }
+  }
+}
