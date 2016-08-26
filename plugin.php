@@ -120,5 +120,4 @@ class Plugin extends AbstractPlugin
     {
         return true;
     }
-
 }

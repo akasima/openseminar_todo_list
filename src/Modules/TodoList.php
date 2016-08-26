@@ -10,13 +10,18 @@ class TodoList extends AbstractModule
 {
     public static function boot()
     {
-        ///* Code1-2
+        /* Code1-2
         // 라우트 등록
         static::registerInstanceRoute();
-        //*/
+        */
+
+        /* Code8-2
+        // 라우트 등록
+        static::registerSettingsRoute();
+        */
     }
 
-    ///* Code1-1
+    /* Code1-1
     // 인스턴스 라우트 등록
     protected static function registerInstanceRoute()
     {
@@ -25,26 +30,26 @@ class TodoList extends AbstractModule
 
             // Code4-1
             // create, store 추가. 글을 저장하는 store 는 post 로 처리
-            Route::get('/create', ['as' => 'create', 'uses' => 'UserController@create']);
-            Route::post('/store', ['as' => 'store', 'uses' => 'UserController@store']);
+//            Route::get('/create', ['as' => 'create', 'uses' => 'UserController@create']);
+//            Route::post('/store', ['as' => 'store', 'uses' => 'UserController@store']);
 
             // Code5-1
-            Route::get('/{id}/show', ['as' => 'show', 'uses' => 'UserController@show']);
+//            Route::get('/{id}/show', ['as' => 'show', 'uses' => 'UserController@show']);
 
             // Code6-1
             // edit, update 추가. 글을 수정하는 update 는 post 로 처리
-            Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'UserController@edit']);
-            Route::post('/update', ['as' => 'update', 'uses' => 'UserController@update']);
+//            Route::get('/{id}/edit', ['as' => 'edit', 'uses' => 'UserController@edit']);
+//            Route::post('/update', ['as' => 'update', 'uses' => 'UserController@update']);
 
             // Code7-1
             // 보통 삭제는 post 방식으로 처리하지만 코드 작성 편의상 get 방식으로 처리
-            Route::get('/{id}/destroy', ['as' => 'destroy', 'uses' => 'UserController@destroy']);
+//            Route::get('/{id}/destroy', ['as' => 'destroy', 'uses' => 'UserController@destroy']);
 
         }, ['namespace' => 'OpenSeminar\TodoList']);
     }
-    //*/
+    */
 
-    ///* Code8-1
+    /* Code8-1
     protected static function registerSettingsRoute()
     {
         Route::settings(static::getId(), function() {
@@ -52,11 +57,20 @@ class TodoList extends AbstractModule
                 'as' => sprintf('%s.settings.edit', Plugin::getId()), 'uses' => 'SettingsController@edit'
             ]);
             Route::post('/update', [
-                'as' => sprintf('%s.settings.edit', Plugin::getId()), 'uses' => 'SettingsController@edit'
+                'as' => sprintf('%s.settings.update', Plugin::getId()), 'uses' => 'SettingsController@update'
             ]);
-        });
+        }, ['namespace' => 'OpenSeminar\TodoList']);
     }
-    //*/
+    */
+
+    /* Code 8-3
+    // 메뉴 아이템 수정할 때 '상세 설정 버튼이 보여지며 반환된 url 로 페이지 이동할 수 있음
+    // Menu 에서 모듈 컴포토넌트를 처리할 때 사용되는 인터페이스, Menu 패키지에서 이 메소드를 직접 사용함
+    public static function getInstanceSettingURI($instanceId)
+    {
+        return route(sprintf('%s.settings.edit', Plugin::getId()), ['id' => $instanceId]);
+    }
+    */
 
     /**
      * Return Create Form View

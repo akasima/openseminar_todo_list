@@ -10,6 +10,7 @@ use XeTag;
 use XeEditor;
 use XeStorage;
 use Auth;
+use XeConfig;
 use Xpressengine\Document\Models\Document;
 use Xpressengine\Http\Request;
 use Xpressengine\Routing\InstanceConfig;
@@ -28,33 +29,42 @@ class UserController extends Controller
 
     public function __construct()
     {
-        ///* Code2-1
+        /* Code2-1
         $instanceConfig = InstanceConfig::instance();
         $this->instanceId = $instanceConfig->getInstanceId();
-        //*/
+        */
 
         XePresenter::setSkinTargetId(TodoList::getId());
     }
 
     public function index()
     {
-        ///* Code3-1
+        /* Code3-1
         $perPage = 5;
 
         $paginate = Document::where('instanceId', $this->instanceId)
             ->orderBy('head', 'desc')
             ->paginate($perPage);
 
+        // Code8-4
+//        $config = XeConfig::get(sprintf('%s.%s', Plugin::getId(), $this->instanceId));
+//
+//        return XePresenter::make('index', [
+//            'title' => 'Todo list',
+//            'paginate' => $paginate,
+//            'config' => $config,
+//        ]);
+
         return XePresenter::make('index', [
             'title' => 'Todo list',
             'paginate' => $paginate,
         ]);
-        //*/
+        */
 
         return XePresenter::make('index', ['title' => 'Todo list']);
     }
 
-    ///* Code4-3
+    /* Code4-3
     public function create()
     {
         // 로그인 안했으면 접근 권한 없다는 경고 출력
@@ -66,9 +76,9 @@ class UserController extends Controller
             'instanceId' => $this->instanceId,  // 에디터에서 사용
         ]);
     }
-    //*/
+    */
 
-    ///* Code4-5
+    /* Code4-5
     public function store(Request $request)
     {
         // 로그인 안했으면 접근 권한 없다는 경고 출력
@@ -96,10 +106,8 @@ class UserController extends Controller
         XeDB::beginTransaction();
 
         // 문서 등록
-        /** @var Document $doc */
         $doc = XeDocument::add($inputs);
 
-        /** @var \Xpressengine\Editor\AbstractEditor $editor */
         $editor = XeEditor::get($this->instanceId);
 
         // 에디터에서 처리된 file, tag 연결
@@ -118,9 +126,9 @@ class UserController extends Controller
         // 리스트 페이지로 이동
         return redirect(instanceRoute('index'));
     }
-    //*/
+    */
 
-    ///* Code5-1
+    /* Code5-1
     public function show($menuUrl, $id)
     {
         $item = Document::find($id);
@@ -129,9 +137,9 @@ class UserController extends Controller
             'item' => $item,
         ]);
     }
-    //*/
+    */
 
-    ///* Code6-3
+    /* Code6-3
     public function edit($menuUrl, $id)
     {
         $item = Document::find($id);
@@ -146,9 +154,9 @@ class UserController extends Controller
             'item' => $item,
         ]);
     }
-    //*/
+    */
 
-    ///* Code6-4
+    /* Code6-4
     public function update(Request $request)
     {
         $item = Document::find($request->get('id'));
@@ -170,10 +178,8 @@ class UserController extends Controller
         XeDB::beginTransaction();
 
         // 문서 등록
-        /** @var Document $doc */
         $doc = XeDocument::put($item);
 
-        /** @var \Xpressengine\Editor\AbstractEditor $editor */
         $editor = XeEditor::get($this->instanceId);
 
         // 에디터에서 처리된 file, tag 연결
@@ -192,9 +198,9 @@ class UserController extends Controller
         // 보기 페이지로 이동
         return redirect(instanceRoute('show', ['id' => $doc->id]));
     }
-    //*/
+    */
 
-    ///* Code7-3
+    /* Code7-3
     public function destroy($menuUrl, $id)
     {
         $item = Document::find($id);
@@ -212,5 +218,5 @@ class UserController extends Controller
             ['alert' => ['type' => 'success', 'message' => '삭제 되었습니다.']]
         );
     }
-    //*/
+    */
 }

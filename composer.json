@@ -34,6 +34,12 @@
           "name": "Todo list 모듈의 기본 스킨",
           "description": "",
           "screenshot" : []
+        },
+        "module/openseminar_todo_list@todoList/settingsSkin/openseminar_todo_list@defaultSkin": {
+          "class": "OpenSeminar\\TodoList\\Skins\\SettingsSkin",
+          "name": "Todo list 모듈의 관리자 기본 스킨",
+          "description": "",
+          "screenshot" : []
         }
       }
     }
